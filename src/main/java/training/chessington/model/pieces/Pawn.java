@@ -47,6 +47,27 @@ public class Pawn extends AbstractPiece {
 
 
         }
+        if (capturePiece(board, from, 1, 1)){
+            Coordinates capture = new Coordinates(from.getRow() + 1, from.getCol() +1);
+            Move move = new Move(from, capture);
+            moves.add(move);
+        }
+        if (capturePiece(board, from, -1, -1)){
+            Coordinates capture = new Coordinates(from.getRow() - 1, from.getCol() - 1);
+            Move move = new Move(from, capture);
+            moves.add(move);
+        }
+        if(capturePiece(board, from, 1, -1)){
+            Coordinates capture = new Coordinates(from.getRow() + 1, from.getCol() - 1);
+            Move move = new Move(from, capture);
+            moves.add(move);
+        }
+        if(capturePiece(board,from, -1, 1)){
+            Coordinates capture = new Coordinates(from.getRow() - 1, from.getCol() +1);
+            Move move = new Move(from, capture);
+            moves.add(move);
+
+        }
         return moves;
 
     }
@@ -65,5 +86,15 @@ public class Pawn extends AbstractPiece {
                 return true;
         }
             return false;
+    }
+
+    private boolean capturePiece (Board board, Coordinates from, int rowDiff, int colDiff) {
+        Coordinates capture = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
+        if (board.get(capture)==null || board.get(capture).getColour() == getColour()) {
+            return false;
+
+        }
+            return true;
+
     }
 }
