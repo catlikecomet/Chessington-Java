@@ -72,8 +72,10 @@ public abstract class AbstractPiece implements Piece {
 
     protected List<Move> getMovesInDirection(Coordinates from, Board board, int rowDiff, int colDiff){
         Coordinates nextCoordinates = from;
+        int changeR = rowDiff;
+        int changeC = colDiff;
         List<Move> moves = new ArrayList<>();
-        while(!offboard(board, nextCoordinates, rowDiff, colDiff) && !friendly(board, getColour(), nextCoordinates,  rowDiff, colDiff) && !oponent(board, colour, from, rowDiff,colDiff )){
+        while(!offboard(board, nextCoordinates, rowDiff, colDiff) && !friendly(board, getColour(), nextCoordinates,  rowDiff, colDiff) && !oponent(board, getColour(), nextCoordinates, rowDiff - changeR,colDiff - changeC )){
             moves.add(new Move(from, nextCoordinates.plus(rowDiff,colDiff)));
             nextCoordinates=nextCoordinates.plus(rowDiff, colDiff);
         }
