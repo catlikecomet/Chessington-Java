@@ -70,6 +70,23 @@ public class RookTest {
 
     @Test
     public void rookCannotGoThroughFriendly(){
+        //Arrange
+        Board board = Board.empty();
 
+        Piece rook = new Rook(PlayerColour.WHITE);
+        Coordinates rookCoords = new Coordinates(7,0);
+        board.placePiece(rookCoords,rook);
+
+        Piece friendly = new Pawn(PlayerColour.WHITE);
+        Coordinates friendlyCoords = new Coordinates(7,0);
+        board.placePiece(friendlyCoords, friendly);
+
+        //Act
+        List<Move> rookMoves = rook.getAllowedMoves(rookCoords, board);
+        List<Move> friendlyMoves = friendly.getAllowedMoves(friendlyCoords, board);
+
+        //Assert
+        assertThat(rookMoves).isEmpty();
+        assertThat(friendlyMoves).isEmpty();
     }
 }
