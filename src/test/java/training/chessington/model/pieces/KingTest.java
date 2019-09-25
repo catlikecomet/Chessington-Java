@@ -27,13 +27,7 @@ public class KingTest {
 
         //Assert
         assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(-1, 0)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(0, -1)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(1, 1)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(-1, -1)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(-1, 1)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(1, -1)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(1, 0)));
-        assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(0,1)));
+
 
     }
 
@@ -50,124 +44,25 @@ public class KingTest {
 
         //Assert
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(1, 0)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(0,1)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, 0)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(0, -1)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(1, 1)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, -1)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, 1)));
-        assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(1, -1)));
 
     }
 
     @Test
-    public void kingsCannotGoOffTopBoard(){
+    public void kingsCannotGoOffBoard(){
         //Arrange
         Board board = Board.empty();
 
-        Piece whiteKing = new King(PlayerColour.WHITE);
+        Piece King = new King(PlayerColour);
         Coordinates whiteCoords = new Coordinates(0, 4);
-        board.placePiece(whiteCoords, whiteKing);
+        board.placePiece(whiteCoords, King);
 
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(0,3);
-        board.placePiece(blackCoords, blackKing);
 
         //Act
-        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
+        List<Move> Moves = King.getAllowedMoves(whiteCoords, board);
+
 
         //Assert
-        assertThat(whiteMoves).isEmpty();
-        assertThat(blackMoves).isEmpty();
-
-    }
-
-    @Test
-    public void kingsCannotGoOffBottomBoard(){
-        //Arrange
-        Board board = Board.empty();
-
-        Piece whiteKing = new King(PlayerColour.WHITE);
-        Coordinates whiteCoords = new Coordinates(7, 4);
-        board.placePiece(whiteCoords, whiteKing);
-
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(7,3);
-        board.placePiece(blackCoords, blackKing);
-
-        //Act
-        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
-
-        //Assert
-        assertThat(whiteMoves).isEmpty();
-        assertThat(blackMoves).isEmpty();
-    }
-
-    @Test
-    public void kingsCannotGoOffLeftSideBoard(){
-        //Arrange
-        Board board = Board.empty();
-
-        Piece whiteKing = new King(PlayerColour.WHITE);
-        Coordinates whiteCoords = new Coordinates(7,0);
-        board.placePiece(whiteCoords, whiteKing);
-
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(0, 0);
-        board.placePiece(blackCoords, blackKing);
-
-        //Act
-        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
-
-        //Assert
-        assertThat(whiteMoves).isEmpty();
-        assertThat(blackMoves).isEmpty();
-    }
-    @Test
-    public void kingsCannotGoOffRightSideBoard(){
-        //Arrange
-        Board board = Board.empty();
-
-        Piece whiteKing = new King(PlayerColour.WHITE);
-        Coordinates whiteCoords = new Coordinates(7,7);
-        board.placePiece(whiteCoords, whiteKing);
-
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(0, 7);
-        board.placePiece(blackCoords, blackKing);
-
-        //Act
-        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
-
-        //Assert
-        assertThat(whiteMoves).isEmpty();
-        assertThat(blackMoves).isEmpty();
-    }
-
-    @Test
-    public void kingsCannotGoOffBoardDiagonally(){
-        //Arrange
-        Board board = Board.empty();
-
-        Piece whiteKing = new King(PlayerColour.WHITE);
-        Coordinates whiteCoords = new Coordinates(4,0);
-        board.placePiece(whiteCoords, whiteKing);
-
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(3, 0);
-        board.placePiece(blackCoords, blackKing);
-
-        //Act
-        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
-
-        //Assert
-        assertThat(whiteMoves).isEmpty();
-        assertThat(blackMoves).isEmpty();
+        assertThat(Moves).;
 
     }
 
