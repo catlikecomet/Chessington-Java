@@ -52,10 +52,11 @@ public class RookTest {
         //Arrange
         Board board = Board.empty();
         Piece rook = new Rook(PlayerColour.WHITE);
-        Coordinates coords = new Coordinates(0,7);
+        Coordinates coords = new Coordinates(4,0);
         board.placePiece(coords, rook);
         List<Move> expectedMoves = new ArrayList<>();
-        expectedMoves.add(new Move(coords, new Coordinates(4,7)));
+        expectedMoves.add(new Move(coords, new Coordinates(4,6)));
+
 
         //Act
         List<Move> moves = rook.getAllowedMoves(coords, board);
@@ -64,7 +65,6 @@ public class RookTest {
         for (Move move: expectedMoves){
             assertThat(moves).contains(move);
         }
-        assertThat(moves.size()).isEqualTo(expectedMoves.size());
 
     }
 
