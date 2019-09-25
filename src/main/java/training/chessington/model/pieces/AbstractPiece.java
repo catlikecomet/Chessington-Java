@@ -1,5 +1,8 @@
 package training.chessington.model.pieces;
 
+import sun.misc.ClassFileTransformer;
+import training.chessington.model.Board;
+import training.chessington.model.Coordinates;
 import training.chessington.model.PlayerColour;
 
 public abstract class AbstractPiece implements Piece {
@@ -26,4 +29,22 @@ public abstract class AbstractPiece implements Piece {
     public String toString() {
         return colour.toString() + " " + type.toString();
     }
+
+    protected boolean offboard (Board board,Coordinates from, int rowDiff, int colDiff){
+
+        if (from.getRow() + rowDiff < 0 || from.getRow() + rowDiff >= 8 || from.getCol() + colDiff < 0 || from.getCol() + colDiff >=8){
+            return true;
+        }
+        return false;
+    }
+    protected boolean friendly (Board board, PlayerColour colour, Coordinates from, int rowDiff, int colDiff){
+        Coordinates friend = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
+
+
+        if (board.get(friend) != null && colour.equals(board.get(friend).getColour())) {
+            return true;
+        }
+        return false;
+    }
+
 }

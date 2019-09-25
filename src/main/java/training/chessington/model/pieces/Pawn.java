@@ -80,14 +80,6 @@ public class Pawn extends AbstractPiece {
         return true;
     }
 
-    private boolean offboard (Board board, Coordinates from, int rowDiff, int colDiff){
-
-            if (from.getRow() + rowDiff < 0 || from.getRow() + rowDiff >= 8 || from.getCol() + colDiff < 0 || from.getCol() + colDiff >=8){
-                return true;
-        }
-            return false;
-    }
-
     private boolean capturePiece (Board board, Coordinates from, int rowDiff, int colDiff) {
         Coordinates capture = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
 
