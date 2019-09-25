@@ -6,6 +6,7 @@ import training.chessington.model.Coordinates;
 import training.chessington.model.Move;
 import training.chessington.model.PlayerColour;
 
+import javax.swing.*;
 import java.util.List;
 
 import static training.chessington.model.pieces.PieceAssert.*;
@@ -157,6 +158,37 @@ public class KingTest {
         //Assert
         assertThat(whiteMoves).isEmpty();
         assertThat(blackMoves).isEmpty();
+
+    }
+
+    @Test
+    public void kingsCanCaptureInDiagonalOneSpace(){
+        //Arrange
+        Board board = Board.empty();
+
+        Piece whiteKing = new King(PlayerColour.WHITE);
+        Piece blackEnemyPiece = new Rook(PlayerColour.BLACK);
+        Coordinates whiteKingCoords = new Coordinates(7,4);
+        board.placePiece(whiteKingCoords,whiteKing);
+
+        Coordinates whiteEnemyCoords = whiteKingCoords.plus(1,0);
+        board.placePiece(whiteEnemyCoords,blackEnemyPiece);
+
+        Piece blackKing = new King(PlayerColour.BLACK);
+        Piece whiteEnemyPiece = new Rook(PlayerColour.WHITE);
+        Coordinates blackKingCoords = new Coordinates(0,3);
+        board.placePiece(blackKingCoords,blackKing);
+
+        Coordinates blackEnemyCoords = blackKingCoords.plus(1,0);
+        board.placePiece(blackEnemyCoords,blackEnemyPiece);
+
+        //Act
+        List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteKingCoords,board);
+        List<Move> blackMoves = blackKing.getAllowedMoves(blackKingCoords,board);
+
+        //Assert
+        assertThat(whiteMoves).contains(new Move(whiteKingCoords,whiteEnemyCoords));
+        assertThat(blackMoves).contains(new Move(blackKingCoords,blackEnemyCoords));
 
     }
 
