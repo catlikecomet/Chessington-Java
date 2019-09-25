@@ -50,17 +50,17 @@ public abstract class AbstractPiece implements Piece {
         }
         return false;
     }
-    protected boolean oponent (Board board, PlayerColour colour, Coordinates from, int rowDiff, int colDiff){
-        Coordinates enimy = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
+    protected boolean opponent (Board board, PlayerColour colour, Coordinates from, int rowDiff, int colDiff){
+        Coordinates enemy = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
 
 
-        if (board.get(enimy) != null && !colour.equals(board.get(enimy).getColour())) {
+        if (board.get(enemy) != null && !colour.equals(board.get(enemy).getColour())) {
             return true;
         }
         return false;
     }
     protected Coordinates move(Board board, PlayerColour colour, Coordinates from, int indexC, int indexR){
-        if (!offboard(board, from, indexR - from.getRow(),indexC - from.getCol()) && !friendly(board, colour, from, indexR - from.getRow(), indexC - from.getCol()) && !oponent(board, colour, from, indexR - from.getRow(), indexC - from.getCol() + 1)){
+        if (!offboard(board, from, indexR - from.getRow(),indexC - from.getCol()) && !friendly(board, colour, from, indexR - from.getRow(), indexC - from.getCol()) && !opponent(board, colour, from, indexR - from.getRow(), indexC - from.getCol() + 1)){
             Coordinates Rook = new Coordinates(indexR, indexC);
             return Rook;
 
@@ -75,7 +75,7 @@ public abstract class AbstractPiece implements Piece {
         int changeR = rowDiff;
         int changeC = colDiff;
         List<Move> moves = new ArrayList<>();
-        while(!offboard(board, nextCoordinates, rowDiff, colDiff) && !friendly(board, getColour(), nextCoordinates,  rowDiff, colDiff) && !oponent(board, getColour(), nextCoordinates, rowDiff - changeR,colDiff - changeC )){
+        while(!offboard(board, nextCoordinates, rowDiff, colDiff) && !friendly(board, getColour(), nextCoordinates,  rowDiff, colDiff) && !opponent(board, getColour(), nextCoordinates, rowDiff - changeR,colDiff - changeC )){
             moves.add(new Move(from, nextCoordinates.plus(rowDiff,colDiff)));
             nextCoordinates=nextCoordinates.plus(rowDiff, colDiff);
         }
