@@ -3,7 +3,11 @@ package training.chessington.model.pieces;
 import sun.misc.ClassFileTransformer;
 import training.chessington.model.Board;
 import training.chessington.model.Coordinates;
+import training.chessington.model.Move;
 import training.chessington.model.PlayerColour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractPiece implements Piece {
 
@@ -30,7 +34,7 @@ public abstract class AbstractPiece implements Piece {
         return colour.toString() + " " + type.toString();
     }
 
-    protected boolean offboard (Board board,Coordinates from, int rowDiff, int colDiff){
+    protected boolean offboard (Board board, Coordinates from, int rowDiff, int colDiff){
 
         if (from.getRow() + rowDiff < 0 || from.getRow() + rowDiff >= 8 || from.getCol() + colDiff < 0 || from.getCol() + colDiff >=8){
             return true;
@@ -55,6 +59,27 @@ public abstract class AbstractPiece implements Piece {
         }
         return false;
     }
+    protected Coordinates move(Board board, PlayerColour colour, Coordinates from, int indexC, int indexR){
+        if (!offboard(board, from, indexR - from.getRow(),indexC - from.getCol()) && !friendly(board, colour, from, indexR - from.getRow(), indexC - from.getCol()) && !oponent(board, colour, from, indexR - from.getRow(), indexC - from.getCol() + 1)){
+            Coordinates Rook = new Coordinates(indexR, indexC);
+            return Rook;
+
+        }
+        else {
+            return null;
+        }
+    }
+
+    protected List<Move> getMovesInDirection(Coordinates from, Board board, int rowDiff, int colDiff){
+        Coordinates nextCoordinates = from;
+        List<Move> moves = new ArrayList<>();
+        while(!offboard(board, nextCoordinates, rowDiff, colDiff) && !friendly(board, getColour(), nextCoordinates,  rowDiff, colDiff) && !oponent(board, colour, from, rowDiff,colDiff )){
+            moves.add(new Move(from, nextCoordinates.plus(rowDiff,colDiff)));
+            nextCoordinates=nextCoordinates.plus(rowDiff, colDiff);
+        }
+        return moves;
+    }
+
 }
 
 
