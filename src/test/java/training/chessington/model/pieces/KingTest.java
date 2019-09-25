@@ -62,14 +62,14 @@ public class KingTest {
 
 
         //Act
-        List<Move> Moves = king.getAllowedMoves(coords, board);
+        List<Move> moves = king.getAllowedMoves(coords, board);
 
 
         //Assert
         for (Move move: expectedMoves){
-            assertThat(Moves).contains(move);
+            assertThat(moves).contains(move);
         }
-        assertThat(Moves.size()).isEqualTo(expectedMoves.size());
+        assertThat(moves.size()).isEqualTo(expectedMoves.size());
 
     }
 
