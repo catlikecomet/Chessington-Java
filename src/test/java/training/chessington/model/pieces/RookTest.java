@@ -78,15 +78,18 @@ public class RookTest {
         board.placePiece(rookCoords,rook);
 
         Piece friendly = new Pawn(PlayerColour.WHITE);
-        Coordinates friendlyCoords = new Coordinates(7,0);
+        Coordinates friendlyCoords = new Coordinates(6,0);
         board.placePiece(friendlyCoords, friendly);
+
+        Piece friendlySide = new Pawn(PlayerColour.WHITE);
+        Coordinates sideCoords = new Coordinates(7,2);
+        board.placePiece(sideCoords, friendlySide);
+
 
         //Act
         List<Move> rookMoves = rook.getAllowedMoves(rookCoords, board);
-        List<Move> friendlyMoves = friendly.getAllowedMoves(friendlyCoords, board);
 
         //Assert
-        assertThat(rookMoves).isEmpty();
-        assertThat(friendlyMoves).isEmpty();
+        assertThat(rookMoves).contains(new Move(rookCoords, rookCoords.plus(0,1)));
     }
 }
