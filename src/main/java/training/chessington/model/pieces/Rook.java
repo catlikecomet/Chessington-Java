@@ -18,17 +18,17 @@ public class Rook extends AbstractPiece {
         List<Move> moves = new ArrayList<>();
 
         for (int index = from.getRow() + 1; index  < 8; index ++ ){
-            if (!offboard(board, from, index,0) && !friendly(board, colour, from, index, 0)){
-                Coordinates Rook = new Coordinates(from.getRow()+index, from.getCol());
+            if (!offboard(board, from, index - from.getRow(),0) && !friendly(board, colour, from, index - from.getRow(), 0) && !oponent(board, colour, from, index - from.getRow() -1, 0)){
+                Coordinates Rook = new Coordinates(index, from.getCol());
                 Move move = new Move(from,Rook);
                 moves.add(move);
             }else {
                 break;
             }
         }
-        for (int index = from.getRow() - 1; index  > 0; index -- ){
-            if (!offboard(board, from, index,0) && !friendly(board, colour, from, index, 0)){
-                Coordinates Rook = new Coordinates(from.getRow() - index, from.getCol());
+        for (int index = from.getRow() - 1; index  >= 0; index -- ){
+            if (!offboard(board, from, index - from.getRow(),0) && !friendly(board, colour, from, index - from.getRow(), 0) && !oponent(board, colour, from, index - from.getRow() + 1, 0)){
+                Coordinates Rook = new Coordinates(index , from.getCol());
                 Move move = new Move(from,Rook);
                 moves.add(move);
             }else {
@@ -36,17 +36,17 @@ public class Rook extends AbstractPiece {
             }
         }
         for (int index = from.getCol() + 1; index  < 8; index ++ ){
-            if (!offboard(board, from, index,0) && !friendly(board, colour, from, index, 0)){
-                Coordinates Rook = new Coordinates(from.getRow(), from.getCol()+ index);
+            if (!offboard(board, from, 0,index - from.getCol()) && !friendly(board, colour, from, 0, index - from.getCol()) && !oponent(board, colour, from, 0, index - from.getCol() - 1)){
+                Coordinates Rook = new Coordinates(from.getRow(),index);
                 Move move = new Move(from,Rook);
                 moves.add(move);
             }else {
                 break;
             }
         }
-        for (int index = from.getCol() - 1; index  > 0; index -- ){
-            if (!offboard(board, from, index,0) && !friendly(board, colour, from, index, 0)){
-                Coordinates Rook = new Coordinates(from.getRow(), from.getCol()+ index);
+        for (int index = from.getCol() - 1; index  >= 0; index -- ){
+            if (!offboard(board, from, 0,index - from.getCol()) && !friendly(board, colour, from, 0, index - from.getCol()) && !oponent(board, colour, from, 0, index - from.getCol() + 1)){
+                Coordinates Rook = new Coordinates(from.getRow(), index);
                 Move move = new Move(from,Rook);
                 moves.add(move);
             }else {

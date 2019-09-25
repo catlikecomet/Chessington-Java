@@ -46,5 +46,15 @@ public abstract class AbstractPiece implements Piece {
         }
         return false;
     }
+    protected boolean oponent (Board board, PlayerColour colour, Coordinates from, int rowDiff, int colDiff){
+        Coordinates enimy = new Coordinates(from.getRow() + rowDiff, from.getCol() + colDiff);
 
+
+        if (board.get(enimy) != null && !colour.equals(board.get(enimy).getColour())) {
+            return true;
+        }
+        return false;
+    }
 }
+
+
