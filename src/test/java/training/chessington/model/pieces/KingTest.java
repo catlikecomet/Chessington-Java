@@ -15,20 +15,15 @@ import static org.assertj.core.api.Assertions.*;
 public class KingTest {
 
     @Test
-    public void kingsCanMoveOneSpaceAnyDirection(){
+    public void whiteKingsCanMoveOneSpaceAnyDirection(){
         //Arrange
         Board board = Board.empty();
         Piece whiteKing = new King(PlayerColour.WHITE);
         Coordinates whiteCoords = new Coordinates(7,4);
         board.placePiece(whiteCoords, whiteKing);
 
-        Piece blackKing = new King(PlayerColour.BLACK);
-        Coordinates blackCoords = new Coordinates(0,3);
-        board.placePiece(blackCoords, blackKing);
-
         //Act
         List<Move> whiteMoves = whiteKing.getAllowedMoves(whiteCoords, board);
-        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
 
         //Assert
         assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(1, 0)));
@@ -40,6 +35,20 @@ public class KingTest {
         assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(-1, 1)));
         assertThat(whiteMoves).contains(new Move(whiteCoords, whiteCoords.plus(1, -1)));
 
+    }
+
+    @Test
+    public void blackKingsCanMoveOneSpaceAnyDirection(){
+        //Arrange
+        Board board = Board.empty();
+        Piece blackKing = new King(PlayerColour.BLACK);
+        Coordinates blackCoords = new Coordinates(0,3);
+        board.placePiece(blackCoords, blackKing);
+
+        //Act
+        List<Move> blackMoves = blackKing.getAllowedMoves(blackCoords, board);
+
+        //Assert
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(1, 0)));
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(0,1)));
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, 0)));
@@ -48,6 +57,7 @@ public class KingTest {
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, -1)));
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(-1, 1)));
         assertThat(blackMoves).contains(new Move(blackCoords, blackCoords.plus(1, -1)));
+
     }
 
     @Test
@@ -171,7 +181,7 @@ public class KingTest {
         Coordinates whiteKingCoords = new Coordinates(7,4);
         board.placePiece(whiteKingCoords,whiteKing);
 
-        Coordinates whiteEnemyCoords = whiteKingCoords.plus(1,0);
+        Coordinates whiteEnemyCoords = whiteKingCoords.plus(-1,1);
         board.placePiece(whiteEnemyCoords,blackEnemyPiece);
 
         Piece blackKing = new King(PlayerColour.BLACK);
@@ -179,7 +189,7 @@ public class KingTest {
         Coordinates blackKingCoords = new Coordinates(0,3);
         board.placePiece(blackKingCoords,blackKing);
 
-        Coordinates blackEnemyCoords = blackKingCoords.plus(1,0);
+        Coordinates blackEnemyCoords = blackKingCoords.plus(1,1);
         board.placePiece(blackEnemyCoords,blackEnemyPiece);
 
         //Act
