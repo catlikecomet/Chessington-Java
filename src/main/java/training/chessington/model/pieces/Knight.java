@@ -15,6 +15,48 @@ public class Knight extends AbstractPiece {
 
     @Override
     public List<Move> getAllowedMoves(Coordinates from, Board board) {
-        return new ArrayList<>();
+        List<Move> moves = new ArrayList<>();
+
+        if (!offboard(board,from,2,1) && !friendly(board, colour, from, 2,1)){
+            Coordinates knightMoves = new Coordinates(from.getRow() +2, from.getCol() +1);
+            Move move = new Move(from,knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,1,2) && !friendly(board, colour, from, 1,2)) {
+            Coordinates knightMoves = new Coordinates(from.getRow() +1, from.getCol() +2);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,2,-1) && !friendly(board, colour, from, 2,-1)) {
+            Coordinates knightMoves = new Coordinates(from.getRow() +2, from.getCol() -1);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,1,-2) && !friendly(board, colour, from, 1,-2)) {
+            Coordinates knightMoves = new Coordinates(from.getRow() +1, from.getCol() -2);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,-2,1) && !friendly(board, colour, from, -2,1)) {
+            Coordinates knightMoves = new Coordinates(from.getRow() -2, from.getCol() +1);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,-1,+2) && !friendly(board, colour, from, -1,+2)) {
+            Coordinates knightMoves = new Coordinates(from.getRow() -1, from.getCol()+2);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,-2,-1) && !friendly(board, colour, from, -2,-1)) {
+            Coordinates knightMoves = new Coordinates(from.getRow()-2, from.getCol()-1);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        if (!offboard(board,from,-1,-2) && !friendly(board, colour, from, -1,-2)) {
+            Coordinates knightMoves = new Coordinates(from.getRow()-1, from.getCol()-2);
+            Move move = new Move(from, knightMoves);
+            moves.add(move);
+        }
+        return moves;
     }
 }

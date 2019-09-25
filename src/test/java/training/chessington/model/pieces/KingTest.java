@@ -7,6 +7,7 @@ import training.chessington.model.Move;
 import training.chessington.model.PlayerColour;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static training.chessington.model.pieces.PieceAssert.*;
@@ -51,18 +52,24 @@ public class KingTest {
     public void kingsCannotGoOffBoard(){
         //Arrange
         Board board = Board.empty();
-
-        Piece King = new King(PlayerColour);
-        Coordinates whiteCoords = new Coordinates(0, 4);
-        board.placePiece(whiteCoords, King);
+        Piece king = new King(PlayerColour.WHITE);
+        Coordinates coords = new Coordinates(0, 7);
+        board.placePiece(coords, king);
+        List<Move> expectedMoves = new ArrayList<>();
+        expectedMoves.add(new Move(coords, new Coordinates(0,6)));
+        expectedMoves.add(new Move(coords, new Coordinates(1,6)));
+        expectedMoves.add(new Move(coords, new Coordinates(1,7)));
 
 
         //Act
-        List<Move> Moves = King.getAllowedMoves(whiteCoords, board);
+        List<Move> Moves = king.getAllowedMoves(coords, board);
 
 
         //Assert
-        assertThat(Moves).;
+        for (Move move: expectedMoves){
+            assertThat(Moves).contains(move);
+        }
+        assertThat(Moves.size()).isEqualTo(expectedMoves.size());
 
     }
 
